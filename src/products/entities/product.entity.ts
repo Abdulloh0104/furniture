@@ -11,6 +11,8 @@ import {
 import { Category } from "../../category/entities/category.entity";
 import { Collection } from "../../collections/entities/collection.entity";
 import { ProductVariant } from "../../product_variants/entities/product_variant.entity";
+import { Inventory } from "../../inventory/entities/inventory.entity";
+import { OrderItem } from "../../order_items/entities/order_item.entity";
 
 @Entity("product")
 export class Product {
@@ -90,4 +92,18 @@ export class Product {
     description: "Mahsulot turlari",
   })
   variants: ProductVariant[];
+
+  @OneToMany(() => Inventory, (inventory) => inventory.product)
+  @ApiProperty({
+    type: () => [Inventory],
+    description: "Mahsulot turlari",
+  })
+  inventories: Inventory[];
+
+  @OneToMany(() => OrderItem, (inventory) => inventory.product)
+  @ApiProperty({
+    type: () => [OrderItem],
+    description: "Mahsulot turlari",
+  })
+  orderitems: OrderItem[];
 }

@@ -1,9 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsBoolean,
-  IsOptional,
-  IsString,
-} from "class-validator";
+import { IsBoolean, IsOptional, IsString } from "class-validator";
+import { User } from "../../users/entities/user.entity";
 
 export class CreateUserAddressDto {
   @IsOptional()
@@ -49,4 +46,9 @@ export class CreateUserAddressDto {
     example: "true",
   })
   is_default: boolean;
+
+  @ApiProperty({
+    description: "Manzil egalari (foydalanuvchi)",
+  })
+  user: User;
 }

@@ -18,7 +18,7 @@ export class InventoryService {
 
   async findAll() {
     return await this.inventoryRepository.find({
-      relations: ["product_variant"],
+      relations: ["product_variant", "product", "store"],
     });
   }
 

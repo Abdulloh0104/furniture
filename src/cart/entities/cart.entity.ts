@@ -24,8 +24,6 @@ export class Cart {
   })
   @Column({
     nullable: true,
-    // type: "uuid",
-    // default: () => `'${uuidv4()}'`, // <-- DIQQAT: bu yerda funksiyani string sifatida SQL-ga uzatyapti
   })
   session_id?: string;
 

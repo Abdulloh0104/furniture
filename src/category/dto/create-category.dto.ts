@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsInt, IsOptional, IsString } from "class-validator";
+import { Category } from "../entities/category.entity";
 
 export class CreateCategoryDto {
 
@@ -34,7 +35,7 @@ export class CreateCategoryDto {
   @IsOptional()
   @ApiProperty({
     description: "Asosoy categoriya",
-    example: "divan, stol,stul",
+    example: "4",
   })
-  parent_id?: number;
+  parent?: Category
 }

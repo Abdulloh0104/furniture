@@ -67,13 +67,15 @@ export class OrderItem {
 
   @ApiProperty({
     type: () => ProductVariant,
-    description: "Product turii",
+    description: "Product turi",
     example: "stol",
   })
   @ManyToOne(() => ProductVariant, (variant) => variant.order_items)
   variant: ProductVariant;
 
-  // @ApiProperty({ type: () => Product })
-  // @ManyToOne(() => Product, (product) => product.orderitems)
-  // product: Product;
+  @ApiProperty({ type: () => Product,
+    description: "Product turi",
+    example: "stol",})
+  @ManyToOne(() => Product, (product) => product.orderitems)
+  product: Product;
 }

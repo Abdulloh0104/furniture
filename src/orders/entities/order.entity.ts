@@ -75,7 +75,7 @@ export class Order {
     description: "yetkazib berilgan vaqt",
     example: "2025-05-29",
   })
-  @Column({ default: "2025-05-29" })
+  @Column()
   delivery_date: Date;
 
   @ApiProperty({ description: "Info", example: "Great" })

@@ -12,37 +12,14 @@ import {
 // import { Store } from "./store.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { ProductVariant } from "../../product_variants/entities/product_variant.entity";
+import { Product } from "../../products/entities/product.entity";
+import { Store } from "../../store/entities/store.entity";
 
 @Entity("inventory")
 export class Inventory {
   @ApiProperty({ description: "Inventory yozuvining noyob IDsi " })
   @PrimaryGeneratedColumn()
   id: number;
-
-  //   @ApiProperty({
-  //     description: "Ushbu zaxira yozuvi tegishli bo‘lgan mahsulot",
-  //     type: () => Product,
-  //   })
-  //   @ManyToOne(() => Product, { onDelete: "CASCADE" })
-  //   @JoinColumn({ name: "product_id" })
-  //   product: Product;
-
-  @ApiProperty({
-    description: "Agar mahsulot varianti bo‘lsa, ushbu variant",
-    type: () => ProductVariant,
-    required: false,
-    example: "1",
-  })
-  @ManyToOne(() => ProductVariant, (product) => product.inventories)
-  product_variant?: ProductVariant;
-
-  //   @ApiProperty({
-  //     description: "Ushbu mahsulot saqlanayotgan do‘kon",
-  //     type: () => Store,
-  //   })
-  //   @ManyToOne(() => Store, { onDelete: "CASCADE" })
-  //   @JoinColumn({ name: "store_id" })
-  //   store: Store;
 
   @ApiProperty({ description: "Hozirgi mavjud miqdor", example: 20 })
   @Column({ type: "int" })
@@ -83,4 +60,29 @@ export class Inventory {
   })
   @UpdateDateColumn({ type: "timestamp" })
   updated_at: Date;
+
+  @ApiProperty({
+    description: "Ushbu zaxira yozuvi tegishli bo‘lgan mahsulot",
+    type: () => Product,
+    example: "1",
+  })
+  @ManyToOne(() => Product, (product) => product.inventories)
+  product: Product;
+
+  @ApiProperty({
+    description: "Agar mahsulot varianti bo‘lsa, ushbu variant",
+    type: () => ProductVariant,
+    required: false,
+    example: "1",
+  })
+  @ManyToOne(() => ProductVariant, (product) => product.inventories)
+  product_variant?: ProductVariant;
+
+  @ApiProperty({
+    description: "Ushbu mahsulot saqlanayotgan do‘kon",
+    type: () => Store,
+    example: "1",
+  })
+  @ManyToOne(() => Store, (product) => product.inventories)
+  store: Store;
 }

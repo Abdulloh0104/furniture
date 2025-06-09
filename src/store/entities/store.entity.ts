@@ -3,8 +3,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Inventory } from "../../inventory/entities/inventory.entity";
 
 @Entity("store")
 export class Store {
@@ -53,4 +55,11 @@ export class Store {
   })
   @CreateDateColumn({ type: "timestamp" })
   create_at: Date;
+
+  @OneToMany(() => Inventory, (inventory) => inventory.store)
+  @ApiProperty({
+    type: () => [Inventory],
+    description: "Mahsulot turlari",
+  })
+  inventories: Inventory[];
 }

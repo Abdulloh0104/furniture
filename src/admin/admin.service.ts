@@ -40,8 +40,8 @@ export class AdminService {
     return this.adminRepo.findOneBy({ email });
   }
 
- async update(id: number, updateAdminDto: UpdateAdminDto) {
-    const user = await this.adminRepo.preload({ id, ...updateAdminDto});
+  async update(id: number, updateAdminDto: UpdateAdminDto) {
+    const user = await this.adminRepo.preload({ id, ...updateAdminDto });
     if (!user) {
       throw new NotFoundException(`Admin with ${id} id not found`);
     }
@@ -83,7 +83,7 @@ export class AdminService {
     return { message: "Admin password was changed" };
   }
 
-  async remove(id:number) {
+  async remove(id: number) {
     await this.adminRepo.delete(id);
     return id;
   }

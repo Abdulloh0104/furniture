@@ -5,6 +5,18 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { AdminModule } from "./admin/admin.module";
 import { MailModule } from "./mail/mail.module";
+import { InventoryModule } from './inventory/inventory.module';
+import { StoreModule } from './store/store.module';
+import { CategoryModule } from './category/category.module';
+import { CollectionsModule } from './collections/collections.module';
+import { ProductsModule } from './products/products.module';
+import { UserAddressesModule } from './user_addresses/user_addresses.module';
+import { CartModule } from './cart/cart.module';
+import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from "./payments/payments.module";
+import { ProductVariantsModule } from './product_variants/product_variants.module';
+import { CartItemsModule } from './cart_items/cart_items.module';
+import { OrderItemsModule } from './order_items/order_items.module';
 
 @Module({
   imports: [
@@ -25,11 +37,22 @@ import { MailModule } from "./mail/mail.module";
         logging: false,
       }),
     }),
-
     AuthModule,
     AdminModule,
     UsersModule,
-    MailModule
+    MailModule,
+    InventoryModule,
+    StoreModule,
+    CategoryModule,
+    CollectionsModule,
+    ProductsModule,
+    UserAddressesModule,
+    CartModule,
+    OrdersModule,
+    PaymentsModule,
+    ProductVariantsModule,
+    CartItemsModule,
+    OrderItemsModule,
   ],
   controllers: [],
   providers: [],

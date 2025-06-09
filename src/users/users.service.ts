@@ -40,7 +40,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userRepo.find();
+    return this.userRepo.find({ relations: ["addresses","orders"] });
   }
 
   findOne(id: number) {

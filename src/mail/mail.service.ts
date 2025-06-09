@@ -11,7 +11,7 @@ export class MailService {
 
     await this.mailerService.sendMail({
       to: user.email,
-      subject: "Welcome to Skidkachi App! ",
+      subject: "Welcome to Furniture Markret App! ",
       template: "./confirmation",
       context: {
         name: user.first_name,

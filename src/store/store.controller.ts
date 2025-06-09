@@ -1,14 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { StoreService } from './store.service';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Store } from './entities/store.entity';
+import { Roles } from '../common/decorators/role.decorator';
+import { UserGuard } from '../common/guards/user.guard';
+import { RolesGuard } from '../common/guards/role.guard';
 
 @Controller("store")
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
+  @ApiBearerAuth()
+  @Roles("admin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "CREATE" })
   @ApiResponse({
     status: 200,
@@ -42,6 +48,9 @@ export class StoreController {
     return this.storeService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @Roles("admin", "superadmin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "UPDATE" })
   @ApiResponse({
     status: 200,
@@ -53,6 +62,9 @@ export class StoreController {
     return this.storeService.update(+id, updateStoreDto);
   }
 
+  @ApiBearerAuth()
+  @Roles("superadmin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "DELETE" })
   @ApiResponse({
     status: 200,

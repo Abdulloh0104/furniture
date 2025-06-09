@@ -1,14 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
 import { CreateInventoryDto } from './dto/create-inventory.dto';
 import { UpdateInventoryDto } from './dto/update-inventory.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Inventory } from './entities/inventory.entity';
+import { Roles } from '../common/decorators/role.decorator';
+import { UserGuard } from '../common/guards/user.guard';
+import { RolesGuard } from '../common/guards/role.guard';
 
 @Controller("inventory")
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
 
+  @ApiBearerAuth()
+  @Roles("admin", "superadmin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "CREATE" })
   @ApiResponse({
     status: 200,
@@ -26,7 +32,6 @@ export class InventoryController {
     description: "List of Inventorys",
     type: [Inventory],
   })
-  //
   @Get()
   findAll() {
     return this.inventoryService.findAll();
@@ -43,11 +48,14 @@ export class InventoryController {
     return this.inventoryService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @Roles("admin", "superadmin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "UPDATE" })
   @ApiResponse({
     status: 200,
     description: "Update Inventory",
-    type: Inventory
+    type: Inventory,
   })
   @Patch(":id")
   update(
@@ -57,6 +65,9 @@ export class InventoryController {
     return this.inventoryService.update(+id, updateInventoryDto);
   }
 
+  @ApiBearerAuth()
+  @Roles("superadmin")
+  @UseGuards(UserGuard, RolesGuard)
   @ApiOperation({ summary: "DELETE" })
   @ApiResponse({
     status: 200,

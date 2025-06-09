@@ -22,6 +22,7 @@ export class AuthUserController {
     return this.authService.signUp(createUserDto);
   }
 
+  @HttpCode(200)
   @Post("sign-in")
   async signIn(
     @Body() signInDto: SignInDto,

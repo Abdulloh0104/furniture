@@ -18,7 +18,7 @@ export const winstonConfig = {
       filename: "logs/combine.log",
       level: "info",
       format: winston.format.combine(
-        winston.format.label({ label: "Prismajon" }),
+        winston.format.label({ label: "Furniture" }),
         winston.format.timestamp(),
         winston.format.json()
       ),

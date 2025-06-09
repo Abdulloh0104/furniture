@@ -7,9 +7,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-// import { Product } from "./product.entity";
-// import { ProductVariant } from "./product-variant.entity";
-// import { Store } from "./store.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { ProductVariant } from "../../product_variants/entities/product_variant.entity";
 import { Product } from "../../products/entities/product.entity";

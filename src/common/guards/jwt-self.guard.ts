@@ -2,7 +2,7 @@ import {  CanActivate, ExecutionContext, ForbiddenException, Injectable,  } from
 import { Observable } from "rxjs";
 
 @Injectable()
-export class JwtSelfGuard implements CanActivate {
+export class SelfGuard implements CanActivate {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
